@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white" type="material material-accent">#FFFFFF</color>
+    <color name="whiteThemeDark" type="material material-accent">#F6F6F6</color>
+    <color name="black" type="material material-accent">#1D1617</color>
+    <color name="blackThemeDark" type="material material-accent">#1E1F28</color>
+    <color name="darkThemeDark" type="material material-accent">#2A2C36</color>
+    <color name="border" type="material material-accent">#F7F8F8</color>
+    <color name="gray1" type="material material-accent">#7B6F72</color>
+    <color name="gray2" type="material material-accent">#ADA4A5</color>
+    <color name="gray3" type="material material-accent">#DDDADA</color>
+    <color name="gray1ThemeDark" type="material material-accent">#E6E0E9</color>
+    <color name="gray2ThemeDark" type="material material-accent">#CAC4D0</color>
+    <color name="gray3ThemeDark" type="material material-accent">#ABB4BD</color>
+    <color name="whiteThemeDark2" type="material material-accent">#F5F5F5</color>
+    <color name="danger" type="material material-accent">#FF0000</color>
+    <color name="success" type="material material-accent">#42D742</color>
+    <color name="dangerThemeDark" type="material material-accent">#FF2424</color>
+    <color name="successThemeDark" type="material material-accent">#55D85A</color>
+    <color name="blueLinear1" type="material material-accent">#92A3FD</color>
+    <color name="blueLinear2" type="material material-accent">#9DCEFF</color>
+    <color name="blueLinear3" type="material material-accent">#CC8FED</color>
+    <color name="purpleLinear1" type="material material-accent">#C58BF2</color>
+    <color name="purpleLinear2" type="material material-accent">#EEA4CE</color>
+
+    <color name="blueShadow" type="material material-accent">#95ADFE</color>
+    <color name="dropShadow" type="material material-accent">#000000</color>
+</resources>
+

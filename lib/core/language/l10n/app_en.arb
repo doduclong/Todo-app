@@ -1,0 +1,10 @@
+{
+  "home": "Home",
+  "calendar": "Calendar",
+  "settings": "Setting",
+  "profile": "Profile",
+  "logout": "Logout",
+  "language": "Language",
+  "english": "English",
+  "vietnamese": "Vietnamese"
+}

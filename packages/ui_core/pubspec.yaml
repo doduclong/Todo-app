@@ -1,0 +1,111 @@
+name: ui_core
+description: A new Flutter package project.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=3.0.2 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  gap: ^3.0.1
+  build_runner: ^2.4.6
+  flutter_gen_runner: ^5.3.2
+  #rive: ^0.11.17
+  flutter_svg: ^2.0.7
+  another_flushbar: ^1.12.30
+  animated_text_kit: ^4.2.2
+  lint: ^2.1.2
+  shimmer: ^3.0.0
+  #extended_image: ^8.1.1
+  flutter_staggered_animations: ^1.1.1
+  table_calendar: ^3.0.9
+  custom_pop_up_menu: ^1.2.4
+  qr_flutter: ^4.1.0
+  carousel_slider: ^4.2.1
+  dropdown_search: ^5.0.6
+  badges: ^3.1.2
+  timelines: ^0.1.0
+
+  helper_package:
+    path: ../helper_package
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.2
+
+
+
+flutter_gen:
+  assets:
+    enabled: true
+    outputs:
+      class_name: MyAssets
+      package_parameter_enabled: true
+  fonts:
+    enabled: true
+    outputs:
+      class_name: MyFontFamily
+      package_parameter_enabled: true
+  colors:
+    enabled: true
+    outputs:
+      class_name: MyColor
+      package_parameter_enabled: true
+    inputs:
+      - assets/colors/color.xml
+  output: lib/gen/ # Optional (default: lib/gen/)
+  line_length: 80 # Optional (default: 80)
+
+  integrations:
+    flutter_svg: true
+    flare_flutter: true
+    rive: true
+    lottie: true
+
+flutter:
+#  uses-material-design: true
+  assets:
+    - assets/icons/light/
+    - assets/icons/bold/
+    - assets/icons/logo/
+    - assets/icons/flag/
+    - assets/illustrations/
+    - assets/illustrations/error/
+  fonts:
+    - family: Noto Sans Japanese
+      fonts:
+        - asset: assets/fonts/NotoSansJP/NotoSansJP-Black.ttf
+        - asset: assets/fonts/NotoSansJP/NotoSansJP-Bold.ttf
+        - asset: assets/fonts/NotoSansJP/NotoSansJP-ExtraBold.ttf
+        - asset: assets/fonts/NotoSansJP/NotoSansJP-ExtraLight.ttf
+        - asset: assets/fonts/NotoSansJP/NotoSansJP-Light.ttf
+        - asset: assets/fonts/NotoSansJP/NotoSansJP-Medium.ttf
+        - asset: assets/fonts/NotoSansJP/NotoSansJP-Regular.ttf
+        - asset: assets/fonts/NotoSansJP/NotoSansJP-SemiBold.ttf
+        - asset: assets/fonts/NotoSansJP/NotoSansJP-Thin.ttf
+          style: italic
+    - family: Noto Sans Korean
+      fonts:
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Black.otf
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Bold.otf
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Light.otf
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Medium.otf
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Regular.otf
+        - asset: assets/fonts/NotoSansKR/NotoSansKR-Thin.otf
+          style: italic
+    - family: Noto Sans Simplified Chinese
+      fonts:
+        - asset: assets/fonts/NotoSansSC/NotoSansSC-Black.otf
+        - asset: assets/fonts/NotoSansSC/NotoSansSC-Bold.otf
+        - asset: assets/fonts/NotoSansSC/NotoSansSC-Light.otf
+        - asset: assets/fonts/NotoSansSC/NotoSansSC-Medium.otf
+        - asset: assets/fonts/NotoSansSC/NotoSansSC-Regular.otf
+        - asset: assets/fonts/NotoSansSC/NotoSansSC-Thin.otf
+          style: italic
+
