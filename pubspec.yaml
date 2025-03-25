@@ -49,6 +49,8 @@ dependencies:
     path: packages/storage_core
   helper_package:
     path: packages/helper_package
+  sqflite: ^2.4.1
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
