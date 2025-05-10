@@ -1,9 +1,13 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/core/database/database.dart';
 import 'package:todo/feature/calendar/ui/calendar_ui.dart';
+import 'package:todo/feature/todo/bloc/todo_bloc.dart';
+import 'package:todo/feature/todo/models/todo_model.dart';
 import 'package:todo/feature/todo/ui/todo_ui.dart';
 import 'package:ui_core/src.dart';
-
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart' as picker;
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -25,6 +29,52 @@ class _HomePageState extends State<HomePage> {
       body: getBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          MySubWidgets.bottomSheet.showMyBottomSheet(context: context, child: Column(
+            children: [
+
+              ListTile(
+                title: Text('Add Todo'),
+                onTap: () {
+                  picker.DatePicker.showDatePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime.now(),
+                      maxTime: DateTime(2100, 12, 12),
+                      theme: picker.DatePickerTheme(
+                          headerColor: Colors.orange,
+                          backgroundColor: Colors.blue,
+                          itemStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                          doneStyle:
+                          TextStyle(color: Colors.white, fontSize: 16)),
+                      onChanged: (date) {
+                        print('change $date in time zone ' +
+                            date.timeZoneOffset.inHours.toString());
+                      }, onConfirm: (date) {
+                        print('confirm $date');
+                      }, currentTime: DateTime.now(), locale: picker.LocaleType.vi);
+                },
+              ),
+              ListTile(
+                title: Text('Add Event'),
+                onTap: () {
+                  final todo = Todo(
+                    title: "New Task",
+                    description: "Description of the task",
+                    location: "Location",
+                    startTime: DateTime.now(),
+                    endTime: DateTime.now(),
+                    color: Colors.blue,
+                    tags: ["Tag1", "Tag2"],
+                  );
+                  context.read<TodoBloc>().add(AddTodo(todo));
+                  Navigator.pop(context);
+                  //Navigator.pushNamed(context, RoutesName.addEvent);
+                },
+              ),
+            ],
+          ));
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),
@@ -54,7 +104,10 @@ class _HomePageState extends State<HomePage> {
 
   Widget getBody() {
     if(this._bottomNavIndex == 0) {
-      return TodoPage();
+      return BlocProvider(
+        create: (context) => TodoBloc(DBProvider())..add(LoadTodos()),
+        child: const TodoPage(),
+      );;
     } else {
       return CalendarPage();
     }

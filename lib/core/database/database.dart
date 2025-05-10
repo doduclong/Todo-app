@@ -5,44 +5,70 @@ import 'package:todo/feature/todo/models/todo_model.dart';
 class DBProvider {
   static const int _version = 1;
   static const String _dbName = "Todos.db";
+  // Singleton instance
+  static final DBProvider instance = DBProvider._internal();
+  factory DBProvider() => instance;
+  DBProvider._internal();
+
+  static Database? _database;
+
+  // Get database instance
+  Future<Database> get database async {
+    if (_database != null) return _database!;
+    _database = await _getDB();
+    return _database!;
+  }
 
   static Future<Database> _getDB() async {
     return openDatabase(join(await getDatabasesPath(), _dbName),
         onCreate: (db, version) async => await db.execute(
-            "CREATE TABLE Todo(id INTEGER PRIMARY KEY, title TEXT NOT NULL, description TEXT NOT NULL);"),
+        '''
+          CREATE TABLE Todo (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            description TEXT NOT NULL,
+            location TEXT NOT NULL,
+            start_time INTEGER NOT NULL,
+            end_time INTEGER NOT NULL,
+            color INTEGER NOT NULL,
+            tags TEXT NOT NULL,
+            repeat_type TEXT NOT NULL,
+            repeat_end_date INTEGER
+          )
+        '''),
         version: _version);
   }
 
-  static Future<int> addNote(Todo todo) async {
-    final db = await _getDB();
+  Future<int> insertTodo(Todo todo) async {
+    final db = await database;
     return await db.insert("Todo", todo.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  static Future<int> updateNote(Todo todo) async {
-    final db = await _getDB();
+  Future<int> updateTodo(Todo todo) async {
+    final db = await database;
     return await db.update("Todo", todo.toJson(),
         where: 'id = ?',
         whereArgs: [todo.id],
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  static Future<int> deleteNote(Todo todo) async {
-    final db = await _getDB();
+  Future<int> deleteTodo(int todoId) async {
+    final db = await database;
     return await db.delete(
       "Todo",
       where: 'id = ?',
-      whereArgs: [todo.id],
+      whereArgs: [todoId],
     );
   }
 
-  static Future<List<Todo>?> getAllNotes() async {
-    final db = await _getDB();
+  Future<List<Todo>> getTodos() async {
+    final db = await database;
 
     final List<Map<String, dynamic>> maps = await db.query("Todo");
 
     if (maps.isEmpty) {
-      return null;
+      return [];
     }
 
     return List.generate(maps.length, (index) => Todo.fromJson(maps[index]));
