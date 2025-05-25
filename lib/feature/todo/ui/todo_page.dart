@@ -7,6 +7,7 @@ import 'package:todo/feature/todo/models/repeat_type.dart';
 import 'package:todo/feature/todo/models/todo_model.dart';
 import 'package:todo/feature/todo/ui/widget/todo_widget.dart';
 import 'package:todo/routes/route.dart';
+import 'package:todo/routes/routes_name.dart';
 import 'widget/percentage_circle.dart';
 
 class TodoPage extends StatefulWidget {
@@ -80,7 +81,7 @@ class _TodoPageState extends State<TodoPage> {
                     location: "Ha Noi",
                     startTime: DateTime.now(),
                     endTime: DateTime.now(),
-                    color: Colors.blue,
+                    color: Colors.blue.withOpacity(0.3),
                     tags: ["Gym", "Work"],
                     repeatType: RepeatType.none,
                     repeatEndDate: null

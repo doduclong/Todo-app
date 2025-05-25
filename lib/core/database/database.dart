@@ -33,7 +33,11 @@ class DBProvider {
             color INTEGER NOT NULL,
             tags TEXT NOT NULL,
             repeat_type TEXT NOT NULL,
-            repeat_end_date INTEGER
+            repeat_end_date INTEGER,
+            is_completed INTEGER NOT NULL DEFAULT 0,
+            priority INTEGER NOT NULL DEFAULT 2,
+            created_at INTEGER NOT NULL,
+            updated_at INTEGER NOT NULL     
           )
         '''),
         version: _version);

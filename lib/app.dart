@@ -29,6 +29,8 @@ import 'package:todo/feature/localization/bloc/localization_bloc.dart';
 import 'package:todo/routes/route.dart';
 
 import 'feature/home/ui/home.dart';
+import 'routes/routes.dart';
+import 'routes/routes_name.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
