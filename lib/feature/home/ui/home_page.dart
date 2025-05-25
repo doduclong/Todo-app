@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/core/database/database.dart';
 import 'package:todo/feature/calendar/ui/calendar_ui.dart';
 import 'package:todo/feature/todo/bloc/todo_bloc.dart';
+import 'package:todo/feature/todo/models/repeat_type.dart';
 import 'package:todo/feature/todo/models/todo_model.dart';
 import 'package:todo/feature/todo/ui/todo_ui.dart';
 import 'package:ui_core/src.dart';
@@ -29,51 +30,75 @@ class _HomePageState extends State<HomePage> {
       body: getBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          MySubWidgets.bottomSheet.showMyBottomSheet(context: context, child: Column(
-            children: [
+          MySubWidgets.bottomSheet.showMyBottomSheet(context: context, child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
 
-              ListTile(
-                title: Text('Add Todo'),
-                onTap: () {
-                  picker.DatePicker.showDatePicker(context,
-                      showTitleActions: true,
-                      minTime: DateTime.now(),
-                      maxTime: DateTime(2100, 12, 12),
-                      theme: picker.DatePickerTheme(
-                          headerColor: Colors.orange,
-                          backgroundColor: Colors.blue,
-                          itemStyle: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                          doneStyle:
-                          TextStyle(color: Colors.white, fontSize: 16)),
-                      onChanged: (date) {
-                        print('change $date in time zone ' +
-                            date.timeZoneOffset.inHours.toString());
-                      }, onConfirm: (date) {
-                        print('confirm $date');
-                      }, currentTime: DateTime.now(), locale: picker.LocaleType.vi);
-                },
-              ),
-              ListTile(
-                title: Text('Add Event'),
-                onTap: () {
-                  final todo = Todo(
-                    title: "New Task",
-                    description: "Description of the task",
-                    location: "Location",
-                    startTime: DateTime.now(),
-                    endTime: DateTime.now(),
-                    color: Colors.blue,
-                    tags: ["Tag1", "Tag2"],
-                  );
-                  context.read<TodoBloc>().add(AddTodo(todo));
-                  Navigator.pop(context);
-                  //Navigator.pushNamed(context, RoutesName.addEvent);
-                },
-              ),
-            ],
+                Text("Tên công việc"),
+                MyTextField(
+                  controller: TextEditingController(),
+                ),
+
+                Text("Nội dung công việc"),
+                MyTextField(
+                  controller: TextEditingController(),
+                ),
+
+                Text("Địa điểm thực hiện"),
+                MyTextField(
+                  controller: TextEditingController(),
+                ),
+
+                Text("Thời gian bắt đầu"),
+                MyTextField(
+                  controller: TextEditingController(),
+                ),
+
+                Text("Thời gian kết thúc"),
+                MyTextField(
+                  controller: TextEditingController(),
+                ),
+
+                Text("Nhãn"),
+                MyDropdownSimple(),
+
+                Text("Lặp lại"),
+                MyDropdownSimple(
+                  items: RepeatType.values.map((e) => e.displayName).toList(),
+                  selectedItem: RepeatType.none.displayName,
+                  onChanged: (value) {
+                    print(value);
+                  },
+                ),
+
+                ListTile(
+                  title: Text('Add Todo'),
+                  onTap: () {
+                    picker.DatePicker.showDatePicker(context,
+                        showTitleActions: true,
+                        minTime: DateTime.now(),
+                        maxTime: DateTime(2100, 12, 12),
+                        theme: picker.DatePickerTheme(
+                            headerColor: Colors.orange,
+                            backgroundColor: Colors.blue,
+                            itemStyle: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                            doneStyle:
+                            TextStyle(color: Colors.white, fontSize: 16)),
+                        onChanged: (date) {
+                          print('change $date in time zone ' +
+                              date.timeZoneOffset.inHours.toString());
+                        }, onConfirm: (date) {
+                          print('confirm $date');
+                        }, currentTime: DateTime.now(), locale: picker.LocaleType.vi);
+                  },
+                ),
+              ],
+            ),
           ));
         },
         shape: RoundedRectangleBorder(

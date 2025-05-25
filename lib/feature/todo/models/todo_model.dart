@@ -5,27 +5,37 @@ import 'package:todo/feature/todo/models/repeat_type.dart';
 
 class Todo {
   final int? id;
-  final Color color;
-  final String title;
-  final String location;
-  final String description;
-  final DateTime startTime;
-  final DateTime endTime;
-  final List<String> tags;
-  final RepeatType repeatType;
-  final DateTime? repeatEndDate;
+  Color? color;
+  String title;
+  String? location;
+  String? description;
+  DateTime startTime;
+  DateTime? endTime;
+  bool isCompleted;
+  int priority; // 1: thấp, 2: trung bình, 3: cao
+  List<String>? tags;
+  RepeatType repeatType;
+  DateTime? repeatEndDate;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  Todo(
-      {required this.color,
-      required this.location,
-      required this.startTime,
-      required this.endTime,
-      required this.tags,
-      required this.title,
-      required this.description,
-      this.repeatType = RepeatType.none,
-      this.repeatEndDate,
-      this.id});
+  Todo({
+    required this.id,
+    this.color,
+    this.location,
+    required this.startTime,
+    this.endTime,
+    this.isCompleted = false,
+    this.priority = 2, // Mặc định là trung bình
+    this.tags,
+    required this.title,
+    this.description,
+    this.repeatType = RepeatType.none,
+    this.repeatEndDate,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  })  : createdAt = createdAt ?? DateTime.now(),
+        updatedAt = updatedAt ?? DateTime.now();
 
   factory Todo.fromJson(Map<String, dynamic> json) => Todo(
         id: json['id'],
